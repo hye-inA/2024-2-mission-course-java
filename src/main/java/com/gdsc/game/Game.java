@@ -79,5 +79,17 @@ public class Game {
         opponent = temp;
     }
 
+    // 상태 출력
+    private void printStatus() {
+        System.out.println(currentPlayer.getName() + " 체력: " + currentPlayer.getHealth() + " 마나: " + currentPlayer.getMana()
+                + " | " + opponent.getName() + " 체력: " + opponent.getHealth() + " 마나: " + opponent.getMana());
+        System.out.println("1. 공격(1 ~ 10) ");
+        System.out.println("2. 방어(1 ~ 10) ");
 
+        int skillNumber = 3;
+        for (Skill skill : currentPlayer.getSkills()) {
+            System.out.println(skillNumber + ". " + skill.getName() + "(" + skill.getManaCost()+"~"+skill.getManaCost()*10+")"+" - " + skill.getManaCost() + "MP" + " - " + skill.getCooldown() + "턴");
+            skillNumber++;
+        }
+    }
 }
