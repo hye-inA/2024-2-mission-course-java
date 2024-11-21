@@ -28,4 +28,14 @@ public class Character {
         return random.nextInt(10)+1;
     }
 
+    // 스킬 사용
+    public int useSkill(Skill skill){
+        if(skill.isAvailable() && this.mana >= skill.getManaCost()){
+            this.mana -= skill.getManaCost();
+            skill.useCooldown();
+            return skill.calculateDamage();
+        }
+        return 0;
+    }
+
 }
