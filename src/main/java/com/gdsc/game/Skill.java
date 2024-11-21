@@ -13,4 +13,10 @@ public class Skill {
         this.manaCost = manaCost;
         this.cooldown = cooldown;
     }
+
+    // 데미지 계산
+    public int calculateDamage(){
+        Random rand = new Random();
+        return this.manaCost * rand.nextInt(10)+1;
+    }
 }
