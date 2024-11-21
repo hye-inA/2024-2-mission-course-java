@@ -19,4 +19,22 @@ public class Skill {
         Random rand = new Random();
         return this.manaCost * rand.nextInt(10)+1;
     }
+
+    // 사용 가능 여부 확인
+    // (쿨다운이 0이어야 사용 가능)
+    public boolean isAvailable(){
+        return this.cooldown == 0;
+    }
+
+    // 쿨다운 적용
+    public void useCooldown(){
+        Random rand = new Random();
+        this.cooldown = rand.nextInt(2);
+    }
+    // 쿨다운 감소
+    public void reduceCooldown(){
+        if(this.cooldown > 0){
+            this.cooldown--;
+        }
+    }
 }
