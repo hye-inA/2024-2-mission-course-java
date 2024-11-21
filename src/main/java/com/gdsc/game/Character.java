@@ -22,4 +22,10 @@ public class Character {
         return random.nextInt(10)+1;
     }
 
+    // 방어
+    public int defend(){
+        Random random = new Random();
+        return random.nextInt(10)+1;
+    }
+
 }
