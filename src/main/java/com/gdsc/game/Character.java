@@ -38,4 +38,26 @@ public class Character {
         return 0;
     }
 
+    // 체력 감소
+    public void decreaseHealth(int damage){
+        this.health -= damage;
+    }
+
+    // Getter
+    // 이름 getter
+    public String getName(){
+        return this.name;
+    }
+    // 체력 getter
+    public int getHealth(){
+        return this.health;
+    }
+    // 마나 getter
+    public int getMana(){
+        return this.mana;
+    }
+    // 스킬 목록 getter
+    public Skill[] getSkills() {
+        return this.skills;
+    }
 }
