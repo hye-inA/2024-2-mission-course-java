@@ -92,4 +92,33 @@ public class Game {
             skillNumber++;
         }
     }
+
+
+    // 게임 종료 여부 확인
+    boolean isGameOver() {
+        if(player1.getHealth() <= 0 || player2.getHealth() <= 0){
+            System.out.println("게임 종료");
+            if(player1.getHealth() > player2.getHealth()){
+                System.out.println(player1.getName() + "이(가) 이겼습니다!");
+            }
+            else{
+                System.out.println(player2.getName() + "이(가) 이겼습니다!");
+            }
+            return true;
+        }
+
+        if (turnCount >= maxTurns) {
+            System.out.println("최대 턴 수 도달, 게임 종료");
+            if(player1.getHealth() > player2.getHealth()){
+                System.out.println(player1.getName() + "이(가) 이겼습니다!");
+            }
+            else{
+                System.out.println(player2.getName() + "이(가) 이겼습니다!");
+            }
+            return true;
+        }
+
+        return false;
+    }
+
 }
