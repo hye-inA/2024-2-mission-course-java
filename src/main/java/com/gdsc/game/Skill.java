@@ -37,4 +37,18 @@ public class Skill {
             this.cooldown--;
         }
     }
+
+    // Getter
+    // 이름 getter
+    public String getName(){
+        return this.name;
+    }
+    // 마나 소모량 getter
+    public int getManaCost(){
+        return this.manaCost;
+    }
+    // 쿨다운 getter
+    public int getCooldown(){
+        return this.cooldown;
+    }
 }
