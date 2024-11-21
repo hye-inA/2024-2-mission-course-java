@@ -15,4 +15,11 @@ public class Character {
         this.mana = mana;
         this.skills = skills;
     }
+
+    // 공격
+    public int attack(){
+        Random random = new Random();
+        return random.nextInt(10)+1;
+    }
+
 }
