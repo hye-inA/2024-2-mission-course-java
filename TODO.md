@@ -11,10 +11,12 @@ classDiagram
         -int healthPoint
         -int manaPoint
         -int defense
+        +perform(Action, Character)
     }
 
     class Action {
-        #String name
+        <<interface>>
+        +execute(Character, Character)
     }
 
     class AttackAction {
@@ -30,6 +32,7 @@ classDiagram
     }
 
     class SkillAction {
+        <<abstract>>
         #int manaCost
         #int coolTime
         #int remainingCooltime
@@ -57,10 +60,11 @@ classDiagram
         -int COOL_TIME
     }
 
-    Action <|-- AttackAction
-    Action <|-- DefenseAction
-    Action <|-- SkillAction
-    SkillAction <|-- CutTwice
+    Character ..> Action : uses
+    Action <|.. AttackAction : implements
+    Action <|.. DefenseAction : implements
+    Action <|.. SkillAction : implements
+    SkillAction <|-- CutTwice 
     SkillAction <|-- CutThreeTimes
     SkillAction <|-- PowerStrike
 ~~~
