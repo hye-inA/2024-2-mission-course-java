@@ -7,26 +7,33 @@
 ~~~mermaid
 classDiagram
     class Character {
-        -String name 
+        -String name
         -int healthPoint
         -int manaPoint
+        -int defense
+        +takeDamage(int) void
+        +setDefense(int) void
+        +useMana(int) void
+        +isAlive() boolean
     }
 
     class Action {
         <<interface>>
-        +execute(Character, Character)
+        +execute(Character, Character) void
     }
 
     class AttackAction {
         -int MIN_DAMAGE
         -int MAX_DAMAGE
         -Random random
+        +execute(Character, Character) void
     }
 
     class DefenseAction {
         -int MIN_DEFENSE
         -int MAX_DEFENSE
         -Random random
+        +execute(Character, Character) void
     }
 
     class SkillAction {
@@ -35,6 +42,9 @@ classDiagram
         #int coolTime
         #int remainingCooltime
         #Random random
+        +SkillAction(manaCost, coolTime)
+        +reduceCoolTime() void
+        +execute(Character, Character) void
     }
 
     class CutTwice {
@@ -42,6 +52,8 @@ classDiagram
         -int MAX_DAMAGE
         -int MANA_COST
         -int COOL_TIME
+        +CutTwice()
+        +execute(Character, Character) void
     }
 
     class CutThreeTimes {
@@ -49,6 +61,8 @@ classDiagram
         -int MAX_DAMAGE
         -int MANA_COST
         -int COOL_TIME
+        +CutThreeTimes()
+        +execute(Character, Character) void
     }
 
     class PowerStrike {
@@ -56,15 +70,16 @@ classDiagram
         -int MAX_DAMAGE
         -int MANA_COST
         -int COOL_TIME
+        +PowerStrike()
+        +execute(Character, Character) void
     }
 
-    Character ..> Action : uses
     Action <|.. AttackAction : implements
     Action <|.. DefenseAction : implements
     Action <|.. SkillAction : implements
-    SkillAction <|-- CutTwice 
-    SkillAction <|-- CutThreeTimes
-    SkillAction <|-- PowerStrike
+    SkillAction <|-- CutTwice : extends
+    SkillAction <|-- CutThreeTimes : extends
+    SkillAction <|-- PowerStrike : extends
 ~~~
 ### 기능 목록
 | 객체      | 기능                                                    |

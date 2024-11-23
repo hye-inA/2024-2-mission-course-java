@@ -18,6 +18,7 @@ public class Character {
         this.defense = defense;
     }
 
+
     public String getName() {
         return name;
     }
@@ -44,6 +45,10 @@ public class Character {
             throw new IllegalStateException("마나부족");
         }
         this.manaPoint -= amount;
+    }
+
+    public boolean isAlive(){
+        return healthPoint >0;
     }
 
 

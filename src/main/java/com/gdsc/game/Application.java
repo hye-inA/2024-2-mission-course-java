@@ -25,58 +25,82 @@ public class Application {
             character2 = new Character(names[0], 10, 5);
         }
 
-        System.out.println("\n" + character1.toString() + " | " + character2.toString());
-        System.out.println("1. 공격(1 ~ 10)");
-        System.out.println("2. 방어(1 ~ 10)");
-        System.out.println("3. 두번베기(2 ~ 20) - 2MP -0턴");
-        System.out.println("4. 3번베기(3 ~ 30) - 3MP - 0턴");
-        System.out.println("5. 쎼게 때리기(5 ~ 50) - 5MP - 2턴");
+        Character current = character1;
+        Character target = character2;
 
-        System.out.print("행동을 선택하세요: ");
-        int choice = scanner.nextInt();
+        System.out.print(character1.getName() + " 체력: " + character1.getHealthPoint() + " 마나: " + character1.getManaPoint() + " | ");
+        System.out.println(character2.getName() + " 체력: " + character2.getHealthPoint() + " 마나 " + character2.getManaPoint());
 
-        switch (choice) {
-            case 1:
-                AttackAction attack = new AttackAction();
-                attack.execute(character1, character2);
-                break;
 
-            case 2:
-                DefenseAction defense = new DefenseAction();
-                defense.execute(character1, character2);
-                break;
+        while (turns > 0) {
+            System.out.println("\n" + current.getName() + "의 차례입니다.");
+            System.out.println("1. 공격(1 ~ 10)");
+            System.out.println("2. 방어(1 ~ 10)");
+            System.out.println("3. 두번베기(2 ~ 20) - 2MP -0턴");
+            System.out.println("4. 3번베기(3 ~ 30) - 3MP - 0턴");
+            System.out.println("5. 쎼게 때리기(5 ~ 50) - 5MP - 2턴");
 
-            case 3:
-                if (character1.getManaPoint() >= 2) {
-                    SkillAction skill = new CutTwice();
-                    skill.execute(character1, character2);
-                } else {
-                    System.out.println("마나부족");
-                }
-                break;
+            System.out.print("행동을 선택하세요: ");
+            int choice = scanner.nextInt();
 
-            case 4:
-                if (character1.getManaPoint() >= 3) {
-                    SkillAction skill = new CutThreeTimes();
-                    skill.execute(character1, character2);
-                } else {
-                    System.out.println("마나부족");
-                }
-                break;
+            switch (choice) {
+                case 1:
+                    AttackAction attack = new AttackAction();
+                    attack.execute(current, target);
+                    break;
 
-            default:
-                if (character1.getManaPoint() >= 5) {
-                    SkillAction skill = new PowerStrike();
-                    skill.execute(character1, character2);
-                } else {
-                    System.out.println("마나부족");
-                }
-                break;
+                case 2:
+                    DefenseAction defense = new DefenseAction();
+                    defense.execute(current, target);
+                    break;
+
+                case 3:
+                    if (current.getManaPoint() >= 2) {
+                        SkillAction skill = new CutTwice();
+                        skill.execute(current, target);
+                    } else {
+                        System.out.println("마나부족");
+                    }
+                    break;
+
+                case 4:
+                    if (current.getManaPoint() >= 3) {
+                        SkillAction skill = new CutThreeTimes();
+                        skill.execute(current, target);
+                    } else {
+                        System.out.println("마나부족");
+                    }
+                    break;
+
+                default:
+                    if (current.getManaPoint() >= 5) {
+                        SkillAction skill = new PowerStrike();
+                        skill.execute(current, target);
+                    } else {
+                        System.out.println("마나부족");
+                    }
+                    break;
+
+            }
+            Character temp = current;
+            current = target;
+            target = temp;
+
+            if (current == character1) {
+                turns--;
+            }
+
+            System.out.print(character1.getName() + " 체력: " + character1.getHealthPoint() + " 마나: " + character1.getManaPoint() + " | ");
+            System.out.println(character2.getName() + " 체력: " + character2.getHealthPoint() + " 마나 " + character2.getManaPoint());
+
+            if (!character1.isAlive()) {
+                System.out.println(character2.getName() + "가 이겼습니다!");
+            } else {
+                System.out.println(character1.getName() + "가 이겼습니다!");
+
+            }
+
         }
 
-        /// TODO : 게임종료 - 캐릭터 사망 여부 확인, 턴 수 확인
-
-
     }
-
 }
