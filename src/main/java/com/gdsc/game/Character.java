@@ -7,11 +7,15 @@ public class Character {
 
     private int defense;
 
+    public Character(String name, int healthPoint, int manaPoint) {
+      this(name,healthPoint,manaPoint,0);
+    }
+
     public Character(String name, int healthPoint, int manaPoint, int defense) {
         this.name = name;
         this.healthPoint = healthPoint;
         this.manaPoint = manaPoint;
-        this.defense = 0;
+        this.defense = defense;
     }
 
     public String getName() {
@@ -24,6 +28,10 @@ public class Character {
 
     public int getManaPoint() {
         return manaPoint;
+    }
+
+    public void setDefense(int defense) {
+        this.defense = defense;
     }
 
 }
