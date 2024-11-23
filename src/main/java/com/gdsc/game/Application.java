@@ -1,6 +1,7 @@
 package com.gdsc.game;
 
 import java.util.Scanner;
+
 public class Application {
 
     public static void main(String[] args) {
@@ -35,48 +36,47 @@ public class Application {
         int choice = scanner.nextInt();
 
         switch (choice) {
-//            case 1:
-//                AttackAction attack = new AttackAction();
-//                attack.execute(character1, character2);
-//                break;
+            case 1:
+                AttackAction attack = new AttackAction();
+                attack.execute(character1, character2);
+                break;
 
             case 2:
                 DefenseAction defense = new DefenseAction();
                 defense.execute(character1, character2);
                 break;
 
-//            case 3:
-//                if (character1.getManaPoint() >= 2) {
-//                    SkillAction skill = new CutTwice();
-//                    skill.execute(character1,character2);
-//                } else {
-//                    System.out.println("마나부족");
-//                }
-//                break;
-//
-//            case 4:
-//                if (character1.getManaPoint() >= 3) {
-//                    SkillAction skill = new CutThreeTimes();
-//                    skill.execute(character1,character2);
-//                } else {
-//                    System.out.println("마나부족");
-//                }
-//                break;
-//
-//            default:
-//                if (character1.getManaPoint() >= 5) {
-//                    SkillAction skill = new PowerStrike();
-//                    skill.execute(character1,character2);
-//                } else {
-//                    System.out.println("마나부족");
-//                }
-//                break;
-//        }
+            case 3:
+                if (character1.getManaPoint() >= 2) {
+                    SkillAction skill = new CutTwice();
+                    skill.execute(character1, character2);
+                } else {
+                    System.out.println("마나부족");
+                }
+                break;
 
-            /// TODO : 게임종료 - 캐릭터 사망 여부 확인, 턴 수 확인
+            case 4:
+                if (character1.getManaPoint() >= 3) {
+                    SkillAction skill = new CutThreeTimes();
+                    skill.execute(character1, character2);
+                } else {
+                    System.out.println("마나부족");
+                }
+                break;
 
-
+            default:
+                if (character1.getManaPoint() >= 5) {
+                    SkillAction skill = new PowerStrike();
+                    skill.execute(character1, character2);
+                } else {
+                    System.out.println("마나부족");
+                }
+                break;
         }
 
+        /// TODO : 게임종료 - 캐릭터 사망 여부 확인, 턴 수 확인
+
+
     }
+
 }

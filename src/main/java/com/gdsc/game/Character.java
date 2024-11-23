@@ -38,4 +38,13 @@ public class Character {
         this.defense = defense;
     }
 
+
+    public void useMana(int amount) {
+        if (amount > manaPoint) {
+            throw new IllegalStateException("마나부족");
+        }
+        this.manaPoint -= amount;
+    }
+
+
 }

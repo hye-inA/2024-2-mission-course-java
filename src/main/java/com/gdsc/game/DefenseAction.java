@@ -7,6 +7,8 @@ public class DefenseAction implements Action {
     private static final int MAX_DEFENSE = 10;
     private final Random random = new Random();
 
+
+
     @Override
     public void execute(Character current, Character target) {
         int defense = random.nextInt(MAX_DEFENSE - MIN_DEFENSE + 1) + MIN_DEFENSE;
