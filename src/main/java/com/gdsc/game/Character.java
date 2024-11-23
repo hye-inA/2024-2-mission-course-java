@@ -30,6 +30,10 @@ public class Character {
         return manaPoint;
     }
 
+    public void takeDamage(int demage){
+        this.healthPoint = Math.max(0, healthPoint - demage);
+    }
+
     public void setDefense(int defense) {
         this.defense = defense;
     }
