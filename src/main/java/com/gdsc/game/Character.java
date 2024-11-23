@@ -5,13 +5,11 @@ public class Character {
     private int healthPoint;
     private int manaPoint;
 
-    private int defense;
 
-    public Character(String name, int healthPoint, int manaPoint, int defense) {
+    public Character(String name, int healthPoint, int manaPoint) {
         this.name = name;
         this.healthPoint = healthPoint;
         this.manaPoint = manaPoint;
-        this.defense = 0;
     }
 
     public String getName() {
@@ -24,6 +22,10 @@ public class Character {
 
     public int getManaPoint() {
         return manaPoint;
+    }
+
+    public void takeDamage(int demage){
+        this.healthPoint = Math.max(0, healthPoint - demage);
     }
 
 }
