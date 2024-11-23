@@ -10,8 +10,6 @@ classDiagram
         -String name 
         -int healthPoint
         -int manaPoint
-        -int defense
-        +perform(Action, Character)
     }
 
     class Action {
@@ -40,22 +38,22 @@ classDiagram
     }
 
     class CutTwice {
-        -int MIN_MULTIPLIER
-        -int MAX_MULTIPLIER
+        -int MIN_DAMAGE
+        -int MAX_DAMAGE
         -int MANA_COST
         -int COOL_TIME
     }
 
     class CutThreeTimes {
-        -int MIN_MULTIPLIER
-        -int MAX_MULTIPLIER
+        -int MIN_DAMAGE
+        -int MAX_DAMAGE
         -int MANA_COST
         -int COOL_TIME
     }
 
     class PowerStrike {
-        -int MIN_MULTIPLIER
-        -int MAX_MULTIPLIER
+        -int MIN_DAMAGE
+        -int MAX_DAMAGE
         -int MANA_COST
         -int COOL_TIME
     }
