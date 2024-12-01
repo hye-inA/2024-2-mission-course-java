@@ -1,4 +1,4 @@
-package com.gdsc.game;
+package com.gdsc.game.dto;
 
 public class Character {
     private final String name;

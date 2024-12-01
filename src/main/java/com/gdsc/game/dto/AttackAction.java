@@ -1,4 +1,4 @@
-package com.gdsc.game;
+package com.gdsc.game.dto;
 
 import java.util.Random;
 // 공격

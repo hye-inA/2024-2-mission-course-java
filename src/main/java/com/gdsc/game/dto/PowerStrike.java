@@ -1,13 +1,13 @@
-package com.gdsc.game;
+package com.gdsc.game.dto;
 
-public class CutTwice extends SkillAction {
+public class PowerStrike extends SkillAction{
     private static final int MIN_DAMAGE = 5;
     private static final int MAX_DAMAGE = 50;
 
-    private static final int MANA_COST = 2;
-    private static final int COOL_TIME = 0;
+    private static final int MANA_COST = 5;
+    private static final int COOL_TIME = 2;
 
-    public CutTwice() {
+    public PowerStrike() {
         super(MANA_COST,COOL_TIME);
     }
 

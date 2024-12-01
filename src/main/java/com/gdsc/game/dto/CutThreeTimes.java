@@ -1,4 +1,4 @@
-package com.gdsc.game;
+package com.gdsc.game.dto;
 
 public class CutThreeTimes extends SkillAction{
     private static final int MIN_DAMAGE = 5;
