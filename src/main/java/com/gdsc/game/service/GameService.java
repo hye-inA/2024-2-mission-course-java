@@ -1,7 +1,8 @@
 package com.gdsc.game.service;
 
-import com.gdsc.game.dto.*;
-import com.gdsc.game.dto.Character;
+import com.gdsc.game.domain.*;
+import com.gdsc.game.domain.Character;
+import com.gdsc.game.dto.CharacterStatusResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.Scanner;
@@ -17,6 +18,22 @@ public class GameService {
         scanner = new Scanner(System.in);
         this.character1 = new Character("knight", 50, 30);
         this.character2 = new Character("slime", 10, 5);
+        this.turns = 5;
+    }
+
+    public CharacterStatusResponse getStatus(String name) {
+        Character character = findCharacterByName(name);
+        return new CharacterStatusResponse(
+                character.getName(),
+                character.getHealthPoint(),
+                character.getManaPoint()
+        );
+    }
+
+    private Character findCharacterByName(String name) {
+        if (character1.getName().equals(name)) return character1;
+        if (character2.getName().equals(name)) return character2;
+        throw new IllegalArgumentException("Character not found: " + name);
     }
 
     public void startGame() {

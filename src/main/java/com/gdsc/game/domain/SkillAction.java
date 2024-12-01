@@ -1,4 +1,4 @@
-package com.gdsc.game.dto;
+package com.gdsc.game.domain;
 
 import java.util.Random;
 

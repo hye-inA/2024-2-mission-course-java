@@ -1,4 +1,4 @@
-package com.gdsc.game.dto;
+package com.gdsc.game.domain;
 
 public class CutTwice extends SkillAction {
     private static final int MIN_DAMAGE = 5;
