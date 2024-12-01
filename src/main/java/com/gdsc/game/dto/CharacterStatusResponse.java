@@ -22,4 +22,9 @@ public class CharacterStatusResponse {
     public int getManaPoint() {
         return manaPoint;
     }
+
+    @Override
+    public String toString() {
+        return name + " 체력: " + healthPoint + " 마나: " + manaPoint;
+    }
 }
