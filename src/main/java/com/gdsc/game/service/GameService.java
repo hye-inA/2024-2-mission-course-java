@@ -2,9 +2,12 @@ package com.gdsc.game.service;
 
 import com.gdsc.game.domain.*;
 import com.gdsc.game.domain.Character;
+import com.gdsc.game.dto.ActionResponse;
 import com.gdsc.game.dto.CharacterStatusResponse;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 @Service
@@ -33,7 +36,26 @@ public class GameService {
     private Character findCharacterByName(String name) {
         if (character1.getName().equals(name)) return character1;
         if (character2.getName().equals(name)) return character2;
-        throw new IllegalArgumentException("Character not found: " + name);
+        throw new IllegalArgumentException("캐릭터를 찾지 못하였습니다");
+    }
+
+    public List<ActionResponse> showActions(String characterName, String actionName) {
+        Character character = findCharacterByName(characterName);
+        List<ActionResponse> actions = new ArrayList<>();
+
+        actions.add(new ActionResponse("공격", "데미지(1-10)", 0, 0, turns));
+        actions.add(new ActionResponse("방어", "방어(1-10)", 0, 0, turns));
+        actions.add(new ActionResponse("두번베기", "데미지(2-20)", 2, 0, turns));
+        actions.add(new ActionResponse("3번베기", "데미지(3-30)", 3, 0, turns));
+        actions.add(new ActionResponse("쎄게때리기", "데미지(5-50)", 5, 2, turns));
+
+        if (actionName.equals("name")) {
+            actions.sort((a1, a2) -> a1.getActionName().compareTo(a2.getActionName()));
+        } else if (actionName.equals("cooltime")) {
+            actions.sort((a1, a2) -> Integer.compare(a1.getRemainingCooltime(), a2.getRemainingCooltime()));
+        }
+
+        return actions;
     }
 
     public void startGame() {
@@ -52,19 +74,11 @@ public class GameService {
         Character current = character1;
         Character target = character2;
 
-        printStatus(character1,character2);
 
         while (turns > 0) {
             System.out.println("\n" + current.getName() + "의 차례입니다.");
-            System.out.println("1. 공격(1 ~ 10)");
-            System.out.println("2. 방어(1 ~ 10)");
-            System.out.println("3. 두번베기(2 ~ 20) - 2MP -0턴");
-            System.out.println("4. 3번베기(3 ~ 30) - 3MP - 0턴");
-            System.out.println("5. 쎼게 때리기(5 ~ 50) - 5MP - 2턴");
-
             System.out.print("행동을 선택하세요: ");
             int choice = scanner.nextInt();
-
 
             switch (choice) {
                 case 1:
@@ -103,7 +117,6 @@ public class GameService {
                         System.out.println("마나부족");
                     }
                     break;
-
             }
 
             Character temp = current;
@@ -114,9 +127,6 @@ public class GameService {
                 turns--;
             }
 
-            printStatus(character1,character2);
-
-            // 게임 종료 조건 체크
             if (turns <= 0 || !character1.isAlive() || !character2.isAlive()) {
                 if (!character1.isAlive()) {
                     System.out.println(character2.getName() + "가 이겼습니다!");
@@ -127,12 +137,6 @@ public class GameService {
             }
         }
     }
-
-    private void printStatus(Character character1, Character character2) {
-        System.out.print(character1.getName() + " 체력: " + character1.getHealthPoint() +
-                " 마나: " + character1.getManaPoint() + " | ");
-        System.out.println(character2.getName() + " 체력: " + character2.getHealthPoint() +
-                " 마나: " + character2.getManaPoint());
-    }
 }
+
 
