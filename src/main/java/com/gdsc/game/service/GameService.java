@@ -8,40 +8,34 @@ import java.util.Scanner;
 
 @Service
 public class GameService {
-    private final Scanner scanner = new Scanner(System.in);
-
+    private final Scanner scanner;
     private Character character1;
     private Character character2;
-
     private int turns;
 
+    public GameService() {
+        scanner = new Scanner(System.in);
+        this.character1 = new Character("knight", 50, 30);
+        this.character2 = new Character("slime", 10, 5);
+    }
+
     public void startGame() {
-
-
         System.out.println("===============GAME START=================");
         System.out.println("캐릭터 2명의 이름을 입력해주세요 (쉼표로 구분해주세요):");
         String names[] = scanner.nextLine().split(",");
         System.out.println("턴 수을 입력해주세요:");
-        int turns = scanner.nextInt();
+        this.turns = scanner.nextInt();
 
-        Character character1, character2;
-
-        if (names[0].
-
-                equals("knight")) {
-            character1 = new Character(names[0], 50, 30);
-            character2 = new Character(names[1], 10, 5);
-        } else {
-            character1 = new Character(names[1], 50, 30);
-            character2 = new Character(names[0], 10, 5);
+        if (!names[0].equals("knight")) {
+            Character temp = character1;
+            character1 = character2;
+            character2 = temp;
         }
 
         Character current = character1;
         Character target = character2;
 
-        System.out.print(character1.getName() + " 체력: " + character1.getHealthPoint() + " 마나: " + character1.getManaPoint() + " | ");
-        System.out.println(character2.getName() + " 체력: " + character2.getHealthPoint() + " 마나 " + character2.getManaPoint());
-
+        printStatus(character1,character2);
 
         while (turns > 0) {
             System.out.println("\n" + current.getName() + "의 차례입니다.");
@@ -53,6 +47,7 @@ public class GameService {
 
             System.out.print("행동을 선택하세요: ");
             int choice = scanner.nextInt();
+
 
             switch (choice) {
                 case 1:
@@ -93,6 +88,7 @@ public class GameService {
                     break;
 
             }
+
             Character temp = current;
             current = target;
             target = temp;
@@ -101,17 +97,25 @@ public class GameService {
                 turns--;
             }
 
-            System.out.print(character1.getName() + " 체력: " + character1.getHealthPoint() + " 마나: " + character1.getManaPoint() + " | ");
-            System.out.println(character2.getName() + " 체력: " + character2.getHealthPoint() + " 마나 " + character2.getManaPoint());
+            printStatus(character1,character2);
 
-            if (!character1.isAlive()) {
-                System.out.println(character2.getName() + "가 이겼습니다!");
-            } else {
-                System.out.println(character1.getName() + "가 이겼습니다!");
-
+            // 게임 종료 조건 체크
+            if (turns <= 0 || !character1.isAlive() || !character2.isAlive()) {
+                if (!character1.isAlive()) {
+                    System.out.println(character2.getName() + "가 이겼습니다!");
+                } else if (!character2.isAlive()) {
+                    System.out.println(character1.getName() + "가 이겼습니다!");
+                }
+                break;
             }
-
         }
+    }
+
+    private void printStatus(Character character1, Character character2) {
+        System.out.print(character1.getName() + " 체력: " + character1.getHealthPoint() +
+                " 마나: " + character1.getManaPoint() + " | ");
+        System.out.println(character2.getName() + " 체력: " + character2.getHealthPoint() +
+                " 마나: " + character2.getManaPoint());
     }
 }
 
