@@ -39,17 +39,23 @@ public class Character {
         this.defense = defense;
     }
 
+<<<<<<< Updated upstream:src/main/java/com/gdsc/game/domain/Character.java
 
+=======
+>>>>>>> Stashed changes:src/main/java/com/gdsc/game/Character.java
     public void useMana(int amount) {
         if (amount > manaPoint) {
             throw new IllegalStateException("마나부족");
         }
         this.manaPoint -= amount;
     }
+<<<<<<< Updated upstream:src/main/java/com/gdsc/game/domain/Character.java
 
     public boolean isAlive(){
         return healthPoint >0;
     }
 
 
+=======
+>>>>>>> Stashed changes:src/main/java/com/gdsc/game/Character.java
 }
