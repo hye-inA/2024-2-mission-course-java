@@ -1,7 +1,11 @@
 package com.gdsc.game.domain;
 
+import com.gdsc.game.exception.GameException;
+
 import java.util.Arrays;
 import java.util.List;
+
+import static com.gdsc.game.exception.ErrorCode.JOB_NOT_FOUND;
 
 public enum Job {
     KNIGHT(100, 50, Arrays.asList("CutTwice", "CutThreeTimes", "PowerStrike")),
@@ -29,5 +33,14 @@ public enum Job {
     public List<String> getSkills() {
         return skills;
     }
+
+    public static Job fromString(String value) {
+        try {
+            return Job.valueOf(value.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new GameException(JOB_NOT_FOUND, "존재하지 않는 직업입니다: " + value);
+        }
+    }
+
 
 }

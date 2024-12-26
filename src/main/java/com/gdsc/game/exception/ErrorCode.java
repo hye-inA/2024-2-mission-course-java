@@ -4,7 +4,9 @@ import org.springframework.http.HttpStatus;
 
 public enum ErrorCode {
     INVALID_INPUT_VALUE(HttpStatus.BAD_REQUEST, "400", "잘못된 입력값입니다"),
-    INSUFFICIENT_MANA(HttpStatus.BAD_REQUEST, "400", "마나가 부족합니다");
+    INSUFFICIENT_MANA(HttpStatus.BAD_REQUEST, "400", "마나가 부족합니다"),
+
+    JOB_NOT_FOUND(HttpStatus.NOT_FOUND, "404", "존재하지 않는 직업입니다");
 
     private final HttpStatus status;
     private final String code;
