@@ -4,11 +4,14 @@ import com.gdsc.game.domain.*;
 import com.gdsc.game.domain.Character;
 import com.gdsc.game.dto.ActionResponse;
 import com.gdsc.game.dto.CharacterStatusResponse;
+import com.gdsc.game.exception.GameException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import static com.gdsc.game.exception.ErrorCode.INSUFFICIENT_MANA;
 
 @Service
 public class GameService {
@@ -19,9 +22,6 @@ public class GameService {
 
     public GameService() {
         scanner = new Scanner(System.in);
-        this.character1 = new Character("knight", 50, 30);
-        this.character2 = new Character("slime", 10, 5);
-        this.turns = 5;
     }
 
     public CharacterStatusResponse getStatus(String name) {
@@ -61,15 +61,16 @@ public class GameService {
     public void startGame() {
         System.out.println("===============GAME START=================");
         System.out.println("캐릭터 2명의 이름을 입력해주세요 (쉼표로 구분해주세요):");
-        String names[] = scanner.nextLine().split(",");
+        String inputNames[] = scanner.nextLine().split(",");
+        System.out.println("직업을 입력해주세요 (쉼표로 구분해주세요, KNIGHT/WIZARD/ARCHER):");
+        String[] inputJobs = scanner.nextLine().split(",");
+        System.out.println("레벨을 입력해주세요:");
+        int level = Integer.parseInt(scanner.nextLine().trim());
         System.out.println("턴 수을 입력해주세요:");
         this.turns = scanner.nextInt();
 
-        if (!names[0].equals("knight")) {
-            Character temp = character1;
-            character1 = character2;
-            character2 = temp;
-        }
+        character1 = new Character(inputNames[0].trim(), Job.fromString(inputJobs[0].trim()), level);
+        character2 = new Character(inputNames[1].trim(), Job.fromString(inputJobs[1].trim()), level);
 
         Character current = character1;
         Character target = character2;
@@ -96,7 +97,7 @@ public class GameService {
                         SkillAction skill = new CutTwice();
                         skill.execute(current, target);
                     } else {
-                        System.out.println("마나부족");
+                        throw new GameException(INSUFFICIENT_MANA);
                     }
                     break;
 
@@ -105,7 +106,7 @@ public class GameService {
                         SkillAction skill = new CutThreeTimes();
                         skill.execute(current, target);
                     } else {
-                        System.out.println("마나부족");
+                        throw new GameException(INSUFFICIENT_MANA);
                     }
                     break;
 
@@ -114,7 +115,7 @@ public class GameService {
                         SkillAction skill = new PowerStrike();
                         skill.execute(current, target);
                     } else {
-                        System.out.println("마나부족");
+                        throw new GameException(INSUFFICIENT_MANA);
                     }
                     break;
             }

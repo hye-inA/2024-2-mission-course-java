@@ -22,6 +22,15 @@ public enum Job {
         this.skills = skills;
     }
 
+    public int calculateHealth(int level) {
+        return health + (level * 10);
+    }
+
+    public int calculateMana(int level) {
+        return mana + (level * 5);
+    }
+
+
     public int getHealth() {
         return health;
     }
@@ -38,7 +47,7 @@ public enum Job {
         try {
             return Job.valueOf(value.toUpperCase());
         } catch (IllegalArgumentException e) {
-            throw new GameException(JOB_NOT_FOUND, "존재하지 않는 직업입니다: " + value);
+            throw new GameException(JOB_NOT_FOUND, "존재하지 않는 직업입니링: " + value);
         }
     }
 

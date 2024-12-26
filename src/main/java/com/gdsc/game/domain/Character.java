@@ -12,21 +12,19 @@ public class Character {
     private int healthPoint;
     private int manaPoint;
     private int defense;
+    private int level;
 
     @Enumerated(EnumType.STRING)
     private Job job;
 
     protected Character() {}
 
-    public Character(String name, int healthPoint, int manaPoint) {
-        this(name, healthPoint, manaPoint, 0);
-    }
-
-    public Character(String name, int healthPoint, int manaPoint, int defense) {
+    public Character(String name, Job job, int level) {
         this.name = name;
-        this.healthPoint = healthPoint;
-        this.manaPoint = manaPoint;
-        this.defense = defense;
+        this.job = job;
+        this.level = level;
+        this.healthPoint = job.calculateHealth(level);
+        this.manaPoint = job.calculateMana(level);
     }
 
 
