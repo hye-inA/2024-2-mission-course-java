@@ -24,11 +24,10 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.1'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-<<<<<<< Updated upstream
+
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-=======
->>>>>>> Stashed changes
+
 }
 
 tasks.named('test') {
